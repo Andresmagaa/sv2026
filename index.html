@@ -15,9 +15,37 @@
             background-color: #ffeef2;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
+            overflow: hidden; /* Evita scrolls raros cuando el botón se mueva */
         }
-        h1 { color: #d63384; font-size: 2.5rem; }
-        .buttons { margin-top: 20px; position: relative; }
+        h1 { color: #d63384; font-size: 2.5rem; z-index: 10; }
+        
+        /* Contenedor de las fotos */
+        .slideshow-container {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            margin-bottom: 20px;
+        }
+
+        .slideshow-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* Clase para mostrar la foto activa */
+        .slideshow-container img.active {
+            opacity: 1;
+        }
+
+        .buttons { margin-top: 20px; position: relative; width: 100%; height: 100px; }
         button {
             padding: 15px 30px;
             font-size: 1.2rem;
@@ -25,18 +53,22 @@
             border: none;
             border-radius: 50px;
             transition: 0.3s;
+            z-index: 20;
         }
-        #yesBtn { background-color: #ff4d6d; color: white; margin-right: 10px; }
-        #noBtn { background-color: #adb5bd; color: white; position: absolute; }
-        .gif_container img { width: 250px; border-radius: 15px; }
+        #yesBtn { background-color: #ff4d6d; color: white; position: relative; }
+        #noBtn { background-color: #adb5bd; color: white; position: absolute; left: 55%; }
     </style>
 </head>
 <body>
 
-    <div class="gif_container">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHJndXNidWR4Z3R4bm93amR3eGZ4bm93amR3eGZ4bm93amR3eGZ4bm8mZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/c76IJLufpNwSULPk77/giphy.gif" alt="Cute gif">
+    <div class="slideshow-container">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHJndXNidWR4Z3R4bm93amR3eGZ4bm93amR3eGZ4bm93amR3eGZ4bm8mZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/c76IJLufpNwSULPk77/giphy.gif" class="active">
+        <img src="https://i.ibb.co/4wCqf0zn/IMG-20250912-120849-413.jpg">
+        <img src="https://i.ibb.co/hJySBsq6/IMG-20231231-222102-558.webp">
+        <img src="https://i.ibb.co/PsGkxFGq/IMG-20241115-102515-5141.jpg">
     </div>
-    <h1>¿Quieres ser mi San Valentín? ❤️</h1>
+
+    <h1>¿Quieres ser mi San Valentín, Melissa? ❤️</h1>
     
     <div class="buttons">
         <button id="yesBtn" onclick="nextPage()">¡SÍ!</button>
@@ -44,17 +76,30 @@
     </div>
 
     <script>
+        // Lógica del Slideshow
+        let currentSlide = 0;
+        const slides = document.querySelectorAll(".slideshow-container img");
+
+        function showSlides() {
+            slides[currentSlide].classList.remove("active");
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add("active");
+        }
+
+        setInterval(showSlides, 3000); // Cambia cada 3 segundos
+
+        // Lógica de los botones
         function nextPage() {
-            alert("¡Sabía que dirías que sí! Te amo ❤️");
-            // Aquí puedes redirigir a una foto de ustedes o un video de YouTube
-            // window.location.href = "tu-link-aqui";
+            alert("De todos modos no me podías decir que no. ¡Te amo, Melissa!!! ❤️");
         }
 
         function moveButton() {
-            const x = Math.random() * (window.innerWidth - document.getElementById('noBtn').offsetWidth);
-            const y = Math.random() * (window.innerHeight - document.getElementById('noBtn').offsetHeight);
-            document.getElementById('noBtn').style.left = `${x}px`;
-            document.getElementById('noBtn').style.top = `${y}px`;
+            const btn = document.getElementById('noBtn');
+            // Limitar el movimiento para que no se salga de la pantalla
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
         }
     </script>
 </body>
