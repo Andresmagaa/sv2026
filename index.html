@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -13,14 +13,11 @@
             height: 100vh;
             margin: 0;
             background-color: #ffeef2;
-            font-family: 'Dancing Script', cursive;            text-align: center;
-            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            overflow: hidden; /* Evita scrolls raros cuando el botón se mueva */
         }
-        h1 { color: #d63384; 
-            font-size: 3rem;
-            font-family: 'Dancing Script', cursive;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
-        }
+        h1 { color: #d63384; font-size: 2.5rem; z-index: 10; }
         
         /* Contenedor de las fotos */
         .slideshow-container {
@@ -93,7 +90,7 @@
 
         // Lógica de los botones
         function nextPage() {
-            alert("De todos modos no me podías decir que no. ¡Te amo!!! <3");
+            alert("De todos modos no me podías decir que no. ¡Te amo, Melissa! ❤️");
         }
 
         function moveButton() {
@@ -107,5 +104,3 @@
     </script>
 </body>
 </html>
-
-
